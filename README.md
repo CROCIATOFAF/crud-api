@@ -1,6 +1,3 @@
-# crud-api
-
-
 # Assignment: CRUD API
 
 ## Description
