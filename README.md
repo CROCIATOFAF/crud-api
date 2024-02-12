@@ -1,5 +1,7 @@
 # Assignment: CRUD API
 
+## !!! Checking functionality of requests in this app is best through Postman Desktop Application !!!
+
 ## Description
 
 Your task is to implement simple CRUD API using in-memory database underneath.
