@@ -10,13 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { parseJSONBody, sendJSONResponse, generateUUID } from '../utils/httpHelpers';
 import { users } from '../models/userModel';
 export const handleCreateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Received POST request to /api/users");
     try {
-        const newUser = yield parseJSONBody(req);
-        newUser.id = generateUUID();
+        const userData = yield parseJSONBody(req);
+        console.log("Parsed userData:", userData);
+        const newUser = Object.assign(Object.assign({}, userData), { id: generateUUID() });
         users.push(newUser);
+        console.log("Sending newUser response:", newUser);
         sendJSONResponse(res, newUser, 201);
+        return;
     }
     catch (error) {
-        sendJSONResponse(res, { message: 'Invalid user data provided' }, 400);
+        console.error('Failed to create user:', error);
+        if (!res.headersSent) {
+            sendJSONResponse(res, { message: 'Failed to create user' }, 500);
+            return;
+        }
     }
 });

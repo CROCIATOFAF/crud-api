@@ -9,7 +9,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start:dev": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
         "build": "tsc",
-        "start:prod": "npm run build && node build/index.js",
+        "start:prod": "npm run build && node --no-warnings=ExperimentalWarning --loader ts-node/esm build/index.js",
         "lint": "eslint . --ext .ts",
         "prettier": "prettier --write ."
     },

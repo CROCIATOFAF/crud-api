@@ -1,9 +1,3 @@
-/**
- * Parses the JSON body of an incoming HTTP request.
- *
- * @param {IncomingMessage} req
- * @returns {Promise<any>}
- */
 export const parseRequestBody = (req) => {
     return new Promise((resolve, reject) => {
         let body = '';

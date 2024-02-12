@@ -9,6 +9,7 @@ export const handleDeleteUser = (req: IncomingMessage, res: ServerResponse, user
         return;
     }
     users.splice(index, 1);
+    
     res.writeHead(204);
     res.end();
 };

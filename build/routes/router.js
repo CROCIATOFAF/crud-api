@@ -8,37 +8,37 @@ export const router = (req, res) => {
     const url = new URL(req.url || '', `http://${req.headers.host}`);
     const path = url.pathname;
     const method = req.method;
-    // Regex to match /api/users/{userId} pattern
-    const userRegex = /^\/api\/users\/([a-zA-Z0-9\-]+)$/;
-    // Route: GET /api/users (Fetch all users)
+    console.log(`Router: Handling ${method} request for ${path}`);
+    const userRegex = /^\/api\/users\/([a-zA-Z0-9-]+)$/;
     if (path === '/api/users' && method === 'GET') {
+        console.log('Routing to handleGetUsers');
         handleGetUsers(req, res);
         return;
     }
-    // Route: GET /api/users/{userId} (Fetch single user by ID)
     const userMatch = path.match(userRegex);
     if (userMatch && method === 'GET') {
+        console.log(`Routing to handleGetUserById for userId: ${userMatch[1]}`);
         const userId = userMatch[1];
         handleGetUserById(req, res, userId);
         return;
     }
-    // Route: POST /api/users (Create new user)
     if (path === '/api/users' && method === 'POST') {
+        console.log('Routing to handleCreateUser');
         handleCreateUser(req, res);
         return;
     }
-    // Route: PUT /api/users/{userId} (Update user)
     if (userMatch && method === 'PUT') {
+        console.log(`Routing to handleUpdateUser for userId: ${userMatch[1]}`);
         const userId = userMatch[1];
         handleUpdateUser(req, res, userId);
         return;
     }
-    // Route: DELETE /api/users/{userId} (Delete user)
     if (userMatch && method === 'DELETE') {
+        console.log(`Routing to handleDeleteUser for userId: ${userMatch[1]}`);
         const userId = userMatch[1];
         handleDeleteUser(req, res, userId);
         return;
     }
-    // Handling non-existing endpoints
+    console.log(`No route matched. Sending 404 for ${method} ${path}`);
     sendJSONResponse(res, { message: 'Not Found' }, 404);
 };
